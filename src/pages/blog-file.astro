@@ -14,13 +14,14 @@ interface MarkdownPost {
   default: unknown; // o puedes especificar un tipo si sabes qué es
 }
 
-const matches = import.meta.glob<MarkdownPost>("./posts/*.{md,mdx}", { eager: true });
+const matches = import.meta.glob<MarkdownPost>("./posts/*.{md,mdx}", {
+  eager: true,
+});
 
 const posts = Object.entries(matches).map(([path, mod]) => ({
   ...(mod.frontmatter ?? {}),
   url: path.replace("./posts", "/blog").replace(/\.mdx?$/, ""),
 }));
-
 ---
 
 <MainLayout title="Javier's Blog">
